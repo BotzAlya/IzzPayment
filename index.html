@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IZZ - Anime Themed Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #7b3fe4;
+            --secondary-color: #ff6b9d;
+            --accent-color: #00d4ff;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --success-color: #2ecc71;
+            --anime-bg: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+        }
+
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(123, 63, 228, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 20%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--anime-bg);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(123, 63, 228, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.4);
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .contact-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Payment Info */
+        .payment-info {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(123, 63, 228, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--secondary-color);
+        }
+
+        .payment-details {
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: rgba(123, 63, 228, 0.1);
+            transform: translateX(5px);
+        }
+
+        .detail-icon {
+            background: rgba(123, 63, 228, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 500;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .copy-btn {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        /* QR Section */
+        .qr-section {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(123, 63, 228, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        #qr-code {
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .qr-note {
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+            min-width: 180px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), #9d4edd);
+            color: white;
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .btn-success:hover {
+            background: var(--success-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .developer {
+            margin-top: 10px;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .anime-characters {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            opacity: 0.7;
+        }
+
+        .character {
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .character:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .character:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            background: var(--success-color);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .contact-btn span {
+                display: none;
+            }
+            
+            .contact-btn {
+                padding: 12px 15px;
+            }
+            
+            .payment-info, .qr-section {
+                padding: 20px;
+            }
+            
+            #qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">IZ</div>
+                <div class="logo-text">IZZ PAYMENT</div>
+            </div>
+            <a href="https://t.me/izzstore07" target="_blank" class="contact-btn">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Contact Us</span>
+            </a>
+        </header>
+
+        <!-- Anime Characters Decoration -->
+        <div class="anime-characters">
+            <div class="character">(>ᴗ•)</div>
+            <div class="character">(◕‿◕)</div>
+            <div class="character">(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Payment Information -->
+            <div class="payment-info">
+                <h2 class="section-title"><i class="fas fa-wallet"></i> Touch 'n Go Payment Details</h2>
+                
+                <div class="payment-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="detail-text">
+                            <div class="detail-label">Payment Name</div>
+                            <div class="detail-value">IZZ STORE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="detail-text">
+                            <div class="detail-label">Touch 'n Go Number</div>
+                            <div class="detail-value" id="tng-number">120881672765</div>
+                        </div>
+                        <button class="copy-btn" onclick="copyToClipboard('tng-number')">Copy</button>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="detail-text">
+                            <div class="detail-label">Payment QR Code</div>
+                            <div class="detail-value">Scan for Touch 'n Go eWallet</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="detail-text">
+                            <div class="detail-label">Telegram Support</div>
+                            <div class="detail-value">@izzstore07</div>
+                        </div>
+                        <button class="copy-btn" onclick="copyToClipboard('telegram', '@izzstore07')">Copy</button>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="openTelegram()">
+                        <i class="fab fa-telegram-plane"></i> Telegram Support
+                    </button>
+                    <button class="btn btn-secondary" onclick="testQR()">
+                        <i class="fas fa-qrcode"></i> Test QR Scan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <h2 class="section-title"><i class="fas fa-download"></i> Download QR Code</h2>
+                
+                <div class="qr-container">
+                    <!-- QR Code from provided link -->
+                    <img id="qr-code" src="https://qrco.de/Izzpayment" alt="Touch 'n Go QR Code for IZZ Payment">
+                </div>
+                
+                <p class="qr-note">Scan this QR code with your Touch 'n Go eWallet app to make payment</p>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="downloadQR()">
+                        <i class="fas fa-download"></i> Download QR Code
+                    </button>
+                    <button class="btn btn-success" onclick="simulatePayment()">
+                        <i class="fas fa-check-circle"></i> Simulate Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>© 2023 IZZ Payment. All rights reserved.</p>
+            <p>This website is for Touch 'n Go eWallet payments in Malaysia</p>
+            <p class="developer">Developer: @boyjutawan</p>
+        </footer>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        Copied to clipboard!
+    </div>
+    
+    <script>
+        // Function to copy text to clipboard
+        function copyToClipboard(elementId, fixedText = null) {
+            let textToCopy;
+            
+            if (fixedText) {
+                textToCopy = fixedText;
+            } else {
+                const element = document.getElementById(elementId);
+                textToCopy = element.textContent;
+            }
+            
+            // Create a temporary input element
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            
+            // Select and copy the text
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+            
+            // Show notification
+            showNotification("Copied to clipboard!");
+        }
+        
+        // Function to show notification
+        function showNotification(message) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.classList.add("show");
+            
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 3000);
+        }
+        
+        // Function to download QR code
+        function downloadQR() {
+            const qrCode = document.getElementById("qr-code");
+            const qrUrl = qrCode.src;
+            
+            // Create a temporary anchor element
+            const downloadLink = document.createElement("a");
+            downloadLink.href = qrUrl;
+            downloadLink.download = "IZZ_TouchNGo_QR.png";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            showNotification("QR Code downloaded successfully!");
+        }
+        
+        // Function to open Telegram
+        function openTelegram() {
+            window.open("https://t.me/izzstore07", "_blank");
+        }
+        
+        // Function to test QR code scanning
+        function testQR() {
+            showNotification("QR Code is ready for scanning! Open Touch 'n Go eWallet and scan the QR code.");
+            
+            // Simulate a QR code scan animation
+            const qrContainer = document.querySelector(".qr-container");
+            qrContainer.style.boxShadow = "0 0 25px " + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+            
+            setTimeout(() => {
+                qrContainer.style.boxShadow = "0 10px 25px rgba(0, 0, 0, 0.2)";
+            }, 2000);
+        }
+        
+        // Function to simulate payment
+        function simulatePayment() {
+            showNotification("Payment simulation started. Please check your Touch 'n Go eWallet for confirmation.");
+            
+            // Simulate payment processing
+            const buttons = document.querySelectorAll(".btn");
+            buttons.forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            // Show processing animation
+            const simulateBtn = document.querySelector(".btn-success");
+            const originalContent = simulateBtn.innerHTML;
+            simulateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            setTimeout(() => {
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                simulateBtn.innerHTML = originalContent;
+                showNotification("Payment simulation completed successfully!");
+            }, 3000);
+        }
+        
+        // Ensure QR code loads properly
+        window.addEventListener('load', function() {
+            const qrCode = document.getElementById("qr-code");
+            
+            // Set an error handler in case the QR code fails to load
+            qrCode.onerror = function() {
+                // Fallback QR code using QRServer API with the TnG number
+                this.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TNG${encodeURIComponent(document.getElementById('tng-number').textContent)}`;
+                console.log("Using fallback QR code generator");
+            };
+            
+            // Validate QR code source on load
+            console.log("QR Code Source:", qrCode.src);
+        });
+    </script>
+</body>
+</html>
